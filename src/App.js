@@ -9,18 +9,21 @@ import Search from './components/Search'
 function App() {
 
   const [totalFood, setTotalFood] = useState(foods)
+  const [foodData] = useState(foods)
   const [showForm, setShowForm] = useState(false)
 
   const addNewFood = food => {
-    const foodCopy = [...totalFood, food]
+    const foodCopy = [food, ...totalFood]
     setTotalFood(foodCopy)
   }
 
   const filterFood = (typedLetter) => {
-    const filteredFood = totalFood.filter((food) =>
+    const filteredFood = foodData.filter((food) =>
       food.name.toLowerCase().includes(typedLetter.toLowerCase())
     );
     setTotalFood(filteredFood);
+    
+    
   };
 
   const deleteFood = (name) => {
@@ -41,7 +44,7 @@ function App() {
       <Divider>Food List</Divider>
 
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-        {totalFood.map(foodCard => {
+        {totalFood.map((foodCard) => {
           return <FoodBox
             food={{
               name: foodCard.name,
